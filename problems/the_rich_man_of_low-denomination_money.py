@@ -2,35 +2,19 @@ import sys
 input = sys.stdin.readline
 
 bills = [int(i) for i in input().split()]
-moneys = [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000]
+moneys = [1, 2, 5, 10, 20, 50, 100, 200, 500]
 total = int(input())
 
-ans = 0
-tmp = 0
-cur = 0
+total = total//1000
+M = [-1 for i in range(total + 1)]
+M[0] = 0
+tmpSum = 0
 for i in range(9):
-    tmp += bills[i] * moneys[i]
-    ans += bills[i]
-    cur = i
-    if (tmp >= total):
-        break
-
-if (tmp > total):
-    while(cur >= 0):
-        cnt = 1
-        while(cnt <= bills[cur]):
-            tmp -= moneys[cur]
-            cnt += 1
-            ans -= 1
-
-            if (tmp == total):
-                break
-            if (tmp < total):
-                tmp += moneys[cur]
-                ans += 1
-                break
-        cur -= 1
-        if (tmp == total):
+    tmpSum += moneys[i] * bills[i]
+    for j in range(total+1):
+        if (j > tmpSum):
             break
+        if (j >= moneys[i] and M[j-moneys[i]] != -1):
+            M[j] = max(M[j-moneys[i]]+1, M[j])
 
-print(ans)
+print(M[total])

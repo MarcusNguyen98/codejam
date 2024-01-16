@@ -5,7 +5,6 @@ N = int(input())
 A = [int(i) for i in input().split()]
 
 A.sort()
-print(A)
 def binarySearch(x, y):
     left = y + 1
     right = N - 1
@@ -17,9 +16,10 @@ def binarySearch(x, y):
             left = mid + 1
         else:
             right = mid - 1
-    print(mid)
-    print('y = ' + str(y))
-    return mid - y
+    if (ans == 0):
+        return 0
+
+    return ans - y
 
 ans = 0
 for i in range(N-2):
