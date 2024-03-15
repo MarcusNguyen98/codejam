@@ -1,0 +1,5 @@
+fact = []
+
+n! / k! * (n-k)!
+combination(n, k):
+    return fact[n] / (fact[k] * fact[n-k]) 
